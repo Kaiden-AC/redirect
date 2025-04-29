@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>We're moving to kaiden.cc!</title>
-  <meta http-equiv="refresh" content="10;url=https://kaiden.cc">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Courier New', monospace;
       background-color: #0e0e0e;
       color: #ffffff;
       display: flex;
@@ -15,26 +14,70 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
+
     h1 {
-      font-size: 2em;
+      font-size: 2.5em;
       margin-bottom: 0.5em;
+      white-space: nowrap;
+      border-right: 4px solid #58a6ff;
+      padding-right: 5px;
+      overflow: hidden;
+      display: inline-block;
+      width: 0;
+      animation: 
+        typing 4s steps(26) 1s forwards,
+        blinkCaret 0.75s 5s step-end infinite;
     }
+
     p {
       max-width: 600px;
       text-align: center;
+      opacity: 0;
+      animation: fadeIn 2s ease-out 5s forwards;
     }
+
     a {
       color: #58a6ff;
+      text-decoration: none;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 26ch; }
+    }
+
+    @keyframes blinkCaret {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <h1>We're moving!</h1>
+  <h1>We're moving to kaiden.cc!</h1>
   <p>
-    This site is now located at <a href="https://kaiden.cc">https://kaiden.cc</a><br>
+    This site is now located at <a id="redirect-link" href="https://kaiden.cc">https://kaiden.cc</a><br>
     You’ll be automatically redirected in 10 seconds.
   </p>
   <p>Please update your bookmarks — <strong>this domain will be going offline soon</strong>.</p>
+
+  <script>
+    // Dynamically generate the full redirect URL
+    const currentPath = window.location.pathname + window.location.search + window.location.hash;
+    const redirectUrl = "https://kaiden.cc" + currentPath;
+
+    // Update the link href on the page as well
+    document.getElementById('redirect-link').href = redirectUrl;
+
+    // Redirect after 10 seconds
+    setTimeout(() => {
+      window.location.replace(redirectUrl);
+    }, 10000);
+  </script>
 </body>
 </html>
